@@ -26,6 +26,9 @@
 
     <div class="under">
         <input type="button" id="burtone" value="Successivo">
+        <div class="uss">
+
+        </div>
     </div>
 </div>
 </form>
@@ -38,18 +41,28 @@
         let domanda = document.querySelector("#domanda")
         let risposta = document.querySelector("#inserimento")
         let bottone = document.querySelector("#burtone")
-        let giu = document.querySelector(".under")
+        let giu = document.querySelector(".uss")
         let punteggio = 0
+        const rispostautente = []
+        const rispostacorretta = []
 
         function avanti() {
             obj[indice].useranswer = risposta.value
+            rispostautente.push(risposta.value)
+            rispostacorretta.push(obj[indice].risposta)
             let rispus = obj[indice].useranswer
             risposta.value=""
             if(rispus.toLowerCase()===obj[indice].risposta){
                 punteggio+=1
             }
             if(indice===4){
-                giu.innerHTML = "Gioco concluso! Punteggio: "+punteggio
+                giu.innerHTML = "Gioco concluso! Punteggio: "+punteggio+"<br>"
+                for(let i=0; i<5; i++){
+                    giu.innerHTML += `Risposta utente domanda ${i+1} = `+rispostautente[i]
+                    giu.innerHTML += " / "
+                    giu.innerHTML += `Risposta corretta domanda ${i+1} = `+rispostacorretta[i]+"<br>"
+                }
+                
             }else{
             indice += 1
             domanda.innerHTML = obj[indice].ndomanda
